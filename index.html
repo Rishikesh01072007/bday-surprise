@@ -102,7 +102,7 @@ button {
 
 <!-- STORY -->
 <div class="screen story" id="story" style="display:none;">
-  <img id="storyImg" src="img1.jpg">
+  <img id="storyImg" src="img1.jpeg">
 </div>
 
 <!-- CHAT -->
@@ -138,7 +138,7 @@ function startStory() {
   let interval = setInterval(() => {
     index++;
     if(index <= 6) {
-      document.getElementById("storyImg").src = "img" + index + ".jpg";
+      document.getElementById("storyImg").src = "img" + index + ".jpeg";
     } else {
       clearInterval(interval);
       startChat();
@@ -186,7 +186,7 @@ function finale() {
 
   for(let i=1;i<=6;i++){
     let img = document.createElement("img");
-    img.src = "img"+i+".jpg";
+    img.src = "img"+i+".jpeg";
     img.className = "float";
     img.style.left = Math.random()*90 + "%";
     document.body.appendChild(img);
@@ -201,7 +201,7 @@ function finale() {
   document.body.appendChild(text);
 
   let sub = document.createElement("p");
-  sub.innerText = "Made with ❤️ by Anuj";
+  sub.innerText = "Made with ❤️ by Rishi";
   sub.style.position = "absolute";
   sub.style.top = "55%";
   sub.style.width = "100%";
