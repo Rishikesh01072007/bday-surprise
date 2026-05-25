@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Harshaa 💖</title>
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  font-family: sans-serif;
+  color: white;
+  overflow: hidden;
+}
+
+/* Center screens */
+.screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Input */
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin: 10px;
+}
+
+/* Chat */
+.chat-box {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background: #0b141a;
+}
+
+.msg {
+  background: #202c33;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+/* Story */
+.story img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: zoom 3s linear;
+}
+
+@keyframes zoom {
+  from {transform: scale(1);}
+  to {transform: scale(1.1);}
+}
+
+/* Floating pics */
+.float {
+  position: absolute;
+  width: 120px;
+  border-radius: 10px;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(100vh);}
+  100% {transform: translateY(-20vh);}
+}
+
+/* Fireworks */
+canvas {
+  position: absolute;
+  top: 0;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: hotpink;
+  color: white;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div class="screen" id="lock">
+  <h2>Enter Secret 💖</h2>
+  <input type="password" id="pass" placeholder="Hint: your name">
+  <button onclick="unlock()">Enter</button>
+</div>
+
+<!-- STORY -->
+<div class="screen story" id="story" style="display:none;">
+  <img id="storyImg" src="img1.jpg">
+</div>
+
+<!-- CHAT -->
+<div class="chat-box" id="chat" style="display:none;"></div>
+
+<!-- FINAL -->
+<canvas id="fireworks"></canvas>
+
+<!-- MUSIC (optional) -->
+<audio autoplay loop>
+  <source src="music.mp3">
+</audio>
+
+<script>
+let index = 1;
+
+// PASSWORD
+function unlock() {
+  let p = document.getElementById("pass").value;
+
+  if(p.toLowerCase() === "harshaa") {
+    document.getElementById("lock").style.display = "none";
+    startStory();
+  } else {
+    alert("Wrong password 😒");
+  }
+}
+
+// STORY
+function startStory() {
+  document.getElementById("story").style.display = "block";
+
+  let interval = setInterval(() => {
+    index++;
+    if(index <= 6) {
+      document.getElementById("storyImg").src = "img" + index + ".jpg";
+    } else {
+      clearInterval(interval);
+      startChat();
+    }
+  }, 2500);
+}
+
+// CHAT
+function startChat() {
+  document.getElementById("story").style.display = "none";
+  let chat = document.getElementById("chat");
+  chat.style.display = "block";
+
+  let msgs = [
+    "Hey Harshaa 😊",
+    "I wanted to do something special for you...",
+    "So I made this just for you 💖",
+    "You really mean a lot to me",
+    "Your smile makes everything better 😄",
+    "And today is your day 🎂",
+    "So just enjoy it fully 💫",
+    "Happy Birthday Harshaa 💖✨"
+  ];
+
+  let i = 0;
+  let interval = setInterval(() => {
+    let div = document.createElement("div");
+    div.className = "msg";
+    div.innerText = msgs[i];
+    chat.appendChild(div);
+    i++;
+
+    if(i >= msgs.length) {
+      clearInterval(interval);
+      setTimeout(finale, 3000);
+    }
+  }, 1200);
+}
+
+// FINAL
+function finale() {
+  document.getElementById("chat").style.display = "none";
+
+  startFireworks();
+
+  for(let i=1;i<=6;i++){
+    let img = document.createElement("img");
+    img.src = "img"+i+".jpg";
+    img.className = "float";
+    img.style.left = Math.random()*90 + "%";
+    document.body.appendChild(img);
+  }
+
+  let text = document.createElement("h1");
+  text.innerText = "🎉 HAPPY BIRTHDAY HARSHAA 💖";
+  text.style.position = "absolute";
+  text.style.top = "40%";
+  text.style.width = "100%";
+  text.style.textAlign = "center";
+  document.body.appendChild(text);
+
+  let sub = document.createElement("p");
+  sub.innerText = "Made with ❤️ by Anuj";
+  sub.style.position = "absolute";
+  sub.style.top = "55%";
+  sub.style.width = "100%";
+  sub.style.textAlign = "center";
+  document.body.appendChild(sub);
+}
+
+// FIREWORKS
+function startFireworks() {
+  let canvas = document.getElementById("fireworks");
+  let ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  function fire() {
+    let x = Math.random()*canvas.width;
+    let y = Math.random()*canvas.height;
+
+    for(let i=0;i<120;i++){
+      ctx.fillStyle = "hsl(" + Math.random()*360 + ",100%,50%)";
+      ctx.fillRect(x,y,2,2);
+    }
+  }
+
+  setInterval(fire, 300);
+}
+</script>
+
+</body>
+</html>
